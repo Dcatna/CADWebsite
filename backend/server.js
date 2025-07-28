@@ -27,7 +27,7 @@ app.post('/convert', upload.single('file'), async (req, res) => {
 
   const inputPath = path.resolve(file.path)
   const fileNameNoExt = path.parse(file.originalname).name
-  const outputPath = path.resolve(`converted/${fileNameNoExt}.fbx`)
+  const outputPath = path.resolve(`converted/${fileNameNoExt}.glb`)
 
   const success = await convertToFBX(inputPath, outputPath)
 
@@ -43,7 +43,7 @@ app.post('/convert', upload.single('file'), async (req, res) => {
     }
 
     res.setHeader('Content-Type', 'application/octet-stream')
-    res.setHeader('Content-Disposition', `inline filename="${fileNameNoExt}.fbx"`)
+    res.setHeader('Content-Disposition', `inline; filename="${fileNameNoExt}.glb"`)
     res.send(data)
     fs.unlinkSync(inputPath)
     fs.unlinkSync(outputPath)
@@ -137,24 +137,28 @@ function getBlenderScript() {
 import sys
 
 argv = sys.argv
-argv = argv[argv.index("--") + 1:]  # Get only custom arguments
+argv = argv[argv.index("--") + 1:]
 
 stl_path = argv[0]
-fbx_path = argv[1]
+glb_path = argv[1]
+
+# Enable STL import/export addon
+bpy.ops.preferences.addon_enable(module='io_mesh_stl')
 
 # Clear existing objects
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.delete(use_global=False)
 
-# Import the STL file
-bpy.ops.wm.stl_import(filepath=stl_path)
+# Import the STL
+bpy.ops.import_mesh.stl(filepath=stl_path)
 
-# Export to FBX
-bpy.ops.export_scene.fbx(filepath=fbx_path)
+# Export to GLB
+bpy.ops.export_scene.gltf(filepath=glb_path, export_format='GLB')
 
-print(f"Successfully converted {stl_path} to {fbx_path}")
-`;
+print(f"✅ Successfully converted {stl_path} to {glb_path}")
+`
 }
+
 
 
 app.listen(port, () => {

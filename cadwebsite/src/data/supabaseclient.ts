@@ -76,7 +76,7 @@ export async function getUserById(id: string): Promise<StoredUser | null> {
 
 
 export async function uploadMedia(file: File, user_id: string, fileName: string) {
-  const fullFileName = `${fileName}.fbx`
+  const fullFileName = `${fileName}.glb`
   const filePath = `user-uploads/${user_id}/${fullFileName}`
 
   const { error } = await supabase.storage
@@ -101,7 +101,7 @@ export async function uploadMedia(file: File, user_id: string, fileName: string)
 
 export async function getAllCADFilesForUser(userId: string): Promise<FileType[]> {
   const result: FileType[] = []
-
+  console.log("SDFSDFSFD")
   const path = `user-uploads/${userId}`
   const { data: files, error } = await supabase
     .storage
