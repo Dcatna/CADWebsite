@@ -100,43 +100,54 @@ export const UploadPopup = () => {
           Upload CAD File
         </button>
       </DialogTrigger>
+<DialogContent className="max-w-lg p-6 rounded-2xl bg-black/90 backdrop-blur-md shadow-[0_0_25px_rgba(34,197,94,0.3)] border border-green-400/40">
+  <DialogHeader>
+    <DialogTitle className="text-2xl font-bold text-green-400 text-center tracking-wide drop-shadow-[0_0_5px_rgba(34,197,94,0.6)]">
+      Upload a CAD File
+    </DialogTitle>
+  </DialogHeader>
 
-      <DialogContent className="max-w-lg p-6 rounded-xl bg-gray-900 shadow-xl border border-green-500">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-green-400 text-center">
-            Upload a CAD File
-          </DialogTitle>
-        </DialogHeader>
+  <form onSubmit={handleFormSubmit} className="mt-6 space-y-6">
+    {/* Project Name Input */}
+    <input
+      type="text"
+      placeholder="Enter File/Project Name"
+      className="w-full rounded-lg border border-green-400/40 bg-black/80 text-white px-4 py-2
+                 focus:outline-none focus:ring-2 focus:ring-green-400/60 focus:border-green-400/60
+                 placeholder-gray-500"
+      onChange={(e) => setFileName(e.target.value)}
+    />
 
-        <form onSubmit={handleFormSubmit} className="mt-4 space-y-6">
-          <input
-            type="text"
-            placeholder="Enter File/Project Name"
-            className="mb-2 w-full rounded-md border border-gray-700 bg-black text-white px-3 py-2"
-            onChange={(e) => setFileName(e.target.value)}
-          />
+    {/* File Upload */}
+    <div>
+      <label className="block text-sm font-medium text-green-300 mb-2">
+        Select File
+      </label>
+      <input
+        type="file"
+        accept=".stl,.step,.obj,.ply,.dae,.fbx"
+        onChange={(e) => setFile(e.target.files?.[0] || null)}
+        className="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
+                   file:rounded-md file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-green-500 file:text-black
+                   hover:file:bg-green-400 cursor-pointer"
+      />
+    </div>
 
-          <label className="block text-sm font-medium text-gray-300 mb-1">
-            Select File
-          </label>
-          <input
-            type="file"
-            accept=".stl,.step,.obj,.ply,.dae,.fbx"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-            className="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
-                       file:rounded-md file:border-0
-                       file:text-sm file:font-semibold
-                       file:bg-green-500 file:text-black
-                       hover:file:bg-green-400"
-          />
-
-          <div className="flex justify-end">
-            <Button type="submit" className="px-6 bg-green-500 hover:bg-green-400 text-black">
-              Upload
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
+    {/* Submit Button */}
+    <div className="flex justify-end">
+      <Button
+        type="submit"
+        className="px-6 py-2 bg-green-500 hover:bg-green-400 text-black font-semibold rounded-lg
+                   shadow-[0_0_10px_rgba(34,197,94,0.4)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
+                   transition-all duration-200"
+      >
+        Upload
+      </Button>
+    </div>
+  </form>
+</DialogContent>
     </Dialog>
   );
 };

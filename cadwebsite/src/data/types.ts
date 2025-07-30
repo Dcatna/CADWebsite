@@ -1,25 +1,21 @@
 import type { User } from "@supabase/supabase-js";
 
-
 export type UserData = {
-    user: User;
-    stored: StoredUser;
-    
+  user: User;
+  stored: StoredUser;
 };
 
 export type StoredUser = {
-    email: string;
-
-    user_id: string;
-    username: string;
-}
+  email: string;
+  user_id: string;
+  username: string;
+};
 
 export type FamilyMemeber = {
-    name : string,
-    userId: string,
-    created_at: string,
-
-}
+  name: string;
+  userId: string;
+  created_at: string;
+};
 
 export type GroupMediaItem = {
   url: string;
@@ -27,6 +23,7 @@ export type GroupMediaItem = {
 };
 
 export type FileType = {
-    url: string; 
-    name: string
-}
+  url: string;   // public URL to view file
+  name: string;  // file name
+  path: string;  // ✅ required for Supabase .download()
+};

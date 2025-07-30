@@ -79,7 +79,7 @@ async function convertToFBX(inputPath, outputPath) {
       blenderPath = 'blender' // Linux
     }
 
-    const scriptPath = 'C:\\Users\\ddcat\\OneDrive\\Desktop\\Projects\\WINLAB\\CADWebsite\\backend\\scripts\\convert_stl_to_fbx.py'
+    const scriptPath = 'C:\\Users\\aiden\\AR-CADnew\\CADWebsite\\backend\\scripts\\convert_stl_to_fbx.py'
 
     // Create the Python script if it doesn't exist
     if (!fs.existsSync(scriptPath)) {
