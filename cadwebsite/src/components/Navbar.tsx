@@ -76,11 +76,11 @@ export const UploadPopup = () => {
 
     if (response.ok) {
       const blob = await response.blob();
-      const fbxFile = new File([blob], `${fileName}.fbx`, {
+      const glbFile = new File([blob], `${fileName}.glb`, {
         type: "application/octet-stream",
       });
 
-      const publicUrl = await uploadMedia(fbxFile, userId, fileName);
+      const publicUrl = await uploadMedia(glbFile, userId, fileName);
       if (publicUrl) {
         alert("Upload successful");
         setOpen(false);
